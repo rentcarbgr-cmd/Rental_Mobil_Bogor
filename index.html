@@ -142,6 +142,67 @@ img {
   height: auto;
 }
 
+/* ✨ Tentang Kami */
+.about-card {
+  animation: fadeSlide 1.2s ease both;
+}
+
+.about-img {
+  width: 280px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 1.2s ease forwards;
+}
+
+.about-text {
+  flex: 1;
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slideInRight 1.2s ease forwards;
+  animation-delay: .2s;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade + Slide up untuk seluruh section */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsif (untuk HP) */
+@media (max-width: 560px) {
+  .about-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-img {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -155,10 +216,11 @@ img {
         </div>
 
         <div class="nav-links">
-          <a href="#armada">Armada kami</a>
-          <a href="#syarat">Syarat dan ketentuan</a>
-          <a href="https://wa.me/6282124753672" target="_blank" rel="noopener">Hubungi</a>
-        </div>
+  <a href="#armada">Armada kami</a>
+  <a href="#syarat">Syarat dan ketentuan</a>
+  <a href="#tentang">Tentang Kami</a> <!-- 🔹 Tambahan ini -->
+  <a href="https://wa.me/6282124753672" target="_blank" rel="noopener">Hubungi</a>
+</div>
       </nav>
     </div>
   </header>
@@ -278,6 +340,29 @@ img {
         <h4>Dan Masih Banyak Lagi Wisata Yang Ada di Bogor dan Sekitarnya</h4>
       </div>
     </section>
+
+    <!-- ✨ Section Tentang Kami -->
+<section id="tentang" class="fade-up" style="margin-top:40px;">
+  <h3 style="text-align:center;color:#d80000">Tentang Kami</h3>
+  
+  <div class="card about-card" style="margin-top:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <img src="foto car.jpeg" alt="Tim Rental Mobil Bogor" class="about-img">
+    
+    <div class="about-text">
+      <p style="margin:6px 0;">
+        <strong>Rental Mobil Bogor</strong> adalah layanan transportasi profesional yang berkomitmen memberikan pengalaman berkendara terbaik untuk Anda. 
+        Kami hadir dengan berbagai pilihan kendaraan seperti <strong>MPV, SUV, hingga minibus</strong> yang siap digunakan untuk perjalanan keluarga, liburan, atau keperluan bisnis.
+      </p>
+      <p style="margin:6px 0;">
+        Setiap unit kami dirawat dengan standar tinggi, bersih, dan selalu dalam kondisi prima. 
+        Tim kami juga siap membantu Anda 24 jam melalui layanan WhatsApp untuk memastikan kebutuhan transportasi Anda terpenuhi dengan cepat dan mudah.
+      </p>
+      <p style="margin:6px 0;">
+        <em>“Kenyamanan Anda adalah prioritas utama kami.”</em>
+      </p>
+    </div>
+  </div>
+</section>
 
     <section id="kontak" style="margin-top:26px" class="fade-up">
       <h3>Hubungi kami</h3>
