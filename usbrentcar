@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rental Mobil Bogor — Sewa Mobil</title>
+  <style>
+    :root{--accent:#b90000;--muted:#666}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Arial,Helvetica,sans-serif;margin:0;color:#222;line-height:1.4;background:#f9fbff}
+    header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100}
+    .container{max-width:1000px;margin:0 auto;padding:18px}
+    nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:700;color:var(--accent);display:flex;align-items:center;gap:10px}
+    .nav-links{display:flex;gap:14px}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .25s}
+    .nav-links a:hover{color:var(--accent)}
+    .hero{padding:48px 0;text-align:center;background: transparent;}
+    .hero h1{margin:0 0 6px;font-size:32px}
+    .hero p{margin:0 0 16px;color:var(--muted)}
+    .cta{display:inline-block;padding:10px 16px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:28px}
+    .card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(20,30,50,0.04)}
+    .fleet{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+    .fleet .unit{padding:12px;border-radius:10px;border:1px solid #f0f0f0;background:#fff;transition:transform .4s ease,box-shadow .4s ease}
+    .unit h4{margin:8px 0 6px}
+    .wa-btn{display:inline-block;margin-top:8px;padding:8px 10px;border-radius:8px;text-decoration:none;border:1px solid #e6f1ff;color:var(--accent)}
+    .attractions{margin-top:26px}
+    .attraction-item{padding:12px;border-radius:8px;background:#fff;margin-bottom:10px;border:1px solid #f4f4f4}
+    footer{margin-top:26px;padding:18px 0;background:#fafafa;border-top:1px solid #eee;text-align:center}
+    @media (max-width:560px){.hero h1{font-size:24px}}
+
+    /* ---------- Animations & extras ---------- */
+
+    /* Logo */
+    .logo { width:100px; height:auto; object-fit:contain; transition:transform .3s; cursor:pointer }
+    .logo:hover { transform:scale(1.4) rotate(-4deg) }
+
+    /* hover image */
+    .unit img { width:100%; border-radius:8px; transition:transform .4s, box-shadow .4s }
+    .unit:hover img { transform:scale(1.03); box-shadow:0 10px 30px rgba(0,0,0,0.08) }
+
+    /* center wa button inside unit */
+    .unit { text-align:center }
+    .unit .wa-btn { display:inline-block; margin:10px auto 0; background:#25d366; color:#fff !important; border:none; font-weight:600; padding:8px 12px; animation:float 2s ease-in-out infinite, pulse 2.2s infinite }
+
+    .wa-btn:hover { transform:scale(1.06); box-shadow:0 6px 18px rgba(37,211,102,0.35) }
+
+    @keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } }
+    @keyframes pulse { 0%{ box-shadow:0 0 0 0 rgba(37,211,102,0.45) } 70%{ box-shadow:0 0 0 12px rgba(37,211,102,0) } 100%{ box-shadow:0 0 0 0 rgba(37,211,102,0) } }
+
+    /* elements start hidden and slide up when visible */
+    .fade-up, .fade-in { opacity:0; transform:translateY(30px); transition:all .7s cubic-bezier(.2,.9,.2,1) }
+    .visible { opacity:1; transform:translateY(0) }
+
+    /* small helpers */
+    .muted { color:var(--muted) }
+    body {
+  font-family: Inter, system-ui, Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: #222;
+  line-height: 1.4;
+
+  /* 🌆 Background foto */
+  background: url('tugu_kujang_bogor.jpeg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* 🩶 Tambahkan efek blur lembut supaya teks tetap jelas */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.75); /* bisa diganti jadi rgba(0,0,0,0.3) kalau mau agak gelap */
+  backdrop-filter: blur(2px);
+  z-index: -1;
+}
+    /* ====== Card / Box Lebih Soft ====== */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  padding: 18px;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* ====== Unit Mobil ====== */
+.unit {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(6px);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.unit:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+}
+
+  /* Tablet */
+@media (max-width: 992px) {
+  .container {
+    padding: 14px;
+  }
+  
+  nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .nav-links {
+    justify-content: center;
+  }
+}
+
+/* HP */
+@media (max-width: 560px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  .fleet,
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .unit {
+    padding: 14px;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ✨ Tentang Kami */
+.about-card {
+  animation: fadeSlide 1.2s ease both;
+}
+
+.about-img {
+  width: 280px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 1.2s ease forwards;
+}
+
+.about-text {
+  flex: 1;
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slideInRight 1.2s ease forwards;
+  animation-delay: .2s;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade + Slide up untuk seluruh section */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsif (untuk HP) */
+@media (max-width: 560px) {
+  .about-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-img {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <!-- Logo + Brand (tidak mengubah struktur isi lain) -->
+        <div class="brand">
+          <img src="USB tour travel cl.png" alt="Logo" class="logo">
+          <span>Rental Mobil Bogor</span>
+        </div>
+
+        <div class="nav-links">
+  <a href="#armada">Armada kami</a>
+  <a href="#syarat">Syarat dan ketentuan</a>
+  <a href="#tentang">Tentang Kami</a> <!-- 🔹 Tambahan ini -->
+  <a href="https://wa.me/6282124753672" target="_blank" rel="noopener">Hubungi</a>
+</div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero fade-up">
+      <h1>Rental Mobil Bogor</h1>
+      <p class="muted">Rental Mobil Terpercaya di Bogor — Layanan 24 jam, harga kompetitif</p>
+      <a class="cta" href="https://wa.me/6282124753672" target="_blank">Hubungi Kami</a>
+
+      <div class="features" aria-hidden="false" style="margin-top:20px">
+        <div class="card fade-up">
+          <h3>MENGAPA MEMILIH KAMI?</h3>
+          <p class="muted" style="margin-top:6px">Pilihan mobil beragam, harga transparan, layanan 24 jam.</p>
+        </div>
+        <div class="card fade-up">
+          <h4>Pilihan Mobil yang Beragam</h4>
+          <p class="muted" style="margin:6px 0 0">MPV, SUV — pilih sesuai kebutuhan.</p>
+        </div>
+        <div class="card fade-up">
+          <h4>Harga Kompetitif</h4>
+          <p class="muted" style="margin:6px 0 0">Tanpa biaya tersembunyi; informasi harga jelas.</p>
+        </div>
+        <div class="card fade-up">
+          <h4>Layanan 24 Jam</h4>
+          <p class="muted" style="margin:6px 0 0">Dukungan pelanggan siap membantu kapan saja.</p>
+        </div>
+      </div>
+    </section>
+
+    <h3 style="text-align:center;margin-top:20px;color:#d80000"><strong>Selamat Datang di Website Kami</strong></h3>
+    <h4 style="text-align:center;color:#d80000"><strong>Solusi Transportasi Terbaik Anda</strong></h4>
+    <p style="text-align:center;">Apakah Anda membutuhkan mobil untuk liburan, perjalanan bisnis, atau kebutuhan sehari-hari? Kami siap membantu Anda dengan layanan rental mobil yang terpercaya dan berkualitas.</p>
+
+    <!-- Armada (semua unit tetap ada, diberi class fade-up agar muncul saat scroll) -->
+    <section id="armada">
+      <h3 style="margin-top:18px">Unit Armada</h3>
+      <div class="fleet">
+        <div class="unit fade-up">
+          <img src="innova.png" alt="Innova Reborn" style="border-radius:8px;">
+          <h4>Innova Reborn</h4>
+          <p class="muted" style="margin:0">MPV nyaman untuk keluarga.</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+
+        <div class="unit fade-up">
+          <img src="OIP.jpeg" alt="Pajero" style="border-radius:8px;">
+          <h4>Pajero</h4>
+          <p class="muted" style="margin:0">SUV tangguh untuk medan berat.</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+
+       <div class="unit fade-up">
+          <img src="kisspng-toyota-alphard-toyota-vellfire-car-5b5874bc2234f3.6930466515325237081401-removebg-preview-removebg-preview-removebg-preview.png" alt="Alphard" style="border-radius:8px;">
+          <h4>Alphard</h4>
+          <p class="muted" style="margin:0">Mobil keluarga + kemewahan dan elegan tentunya nyaman.</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+
+        <div class="unit fade-up">
+          <img src="fortuner white.png" alt="Fortuner" style="border-radius:8px;">
+          <h4>Fortuner</h4>
+          <p class="muted" style="margin:0">Performa dan kenyamanan premium.</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+
+        <div class="unit fade-up">
+          <img src="OIP premio.jpeg" alt="Hiace Premio" style="border-radius:8px;">
+          <h4>Hiace Premio</h4>
+          <p class="muted" style="margin:0">Kapasitas besar, cocok untuk rombongan dan tentunya lebih nyaman</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+
+         <div class="unit fade-up">
+          <img src="kisspng-toyota-hiace-toyota-highlander-car-2018-toyota-seq-hiace-5b412a15f35ee3.8053437515309972699969-removebg-preview.png" alt="Hiace Commuter" style="border-radius:8px;">
+          <h4>Hiace Commuter</h4>
+          <p class="muted" style="margin:0">Kapasitas besar, cocok untuk rombongan.</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+
+        <div class="unit fade-up">
+          <img src="1000259131-removebg-preview (1).png" alt="Hiace Luxury" style="border-radius:8px;">
+          <h4>Hiace Luxury</h4>
+          <p class="muted" style="margin:0">Cocok untuk kebutuhan perjalanan eksekutif, wisata keluarga</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+
+        <div class="unit fade-up">
+          <img src="OIP velozz.jpeg" alt="Avanza Veloz" style="border-radius:8px;">
+          <h4>Avanza Veloz</h4>
+          <p class="muted" style="margin:0">Favorit keluarga — efisien dan luas.</p>
+          <a class="wa-btn" href="https://wa.me/6282124753672" target="_blank" rel="noopener">Order via WA</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- objek wisata -->
+    <section class="attractions" style="margin-top:26px">
+      <h3>Objek Wisata</h3>
+
+      <div class="attraction-item fade-up">
+        <h4>Kebun Raya Bogor</h4>
+        <p class="muted" style="margin:6px 0">Kebun Raya Bogor adalah taman botani besar di pusat Kota Bogor yang berisi ribuan koleksi tanaman dari berbagai daerah. Tempat ini cocok untuk rekreasi, edukasi, serta penelitian, dengan suasana hijau dan sejuk. Ikon terkenalnya adalah Istana Bogor dan taman-taman tematik di dalam area kebun. Cocok untuk jalan santai, piknik, dan berfoto. </p>
+      </div>
+
+      <div class="attraction-item fade-up">
+        <h4>Rustic Market Explore The Museum</h4>
+        <p class="muted" style="margin:6px 0">Tempat wisata yang menawarkan arsitektur bergaya rumah klasik Eropa. Dikelilingi oleh hamparan rumput hijau yang luas, Rustic Market memiliki latar belakang pegunungan yang mempesona, pengunjung akan merasakan sensasi seolah sedang liburan ke luar negeri. Cocok untuk bersantai bersama keluarga atau teman, maupun sekadar mencari spot foto estetik.</p>
+      </div>
+
+      <div class="attraction-item fade-up">
+        <h4>Taman Safari Indonseia</h4>
+        <p class="muted" style="margin:6px 0">Taman Safari Indonesia Bogor adalah tempat wisata keluarga di Cisarua, Bogor, yang menawarkan pengalaman melihat satwa dari dekat dengan cara berkeliling menggunakan mobil (safari). Pengunjung dapat memberi makan hewan, menonton pertunjukan, serta menikmati berbagai wahana permainan. Suasananya sejuk karena berada di daerah pegunungan, cocok untuk rekreasi dan edukasi.</p>
+      </div>
+
+      <div class="attraction-item fade-up">
+        <h4>Dan Masih Banyak Lagi Wisata Yang Ada di Bogor dan Sekitarnya</h4>
+      </div>
+    </section>
+
+    <!-- ✨ Section Tentang Kami -->
+<section id="tentang" class="fade-up" style="margin-top:40px;">
+  <h3 style="text-align:center;color:#d80000">Tentang Kami</h3>
+  
+  <div class="card about-card" style="margin-top:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <img src="foto car.jpeg" alt="Tim Rental Mobil Bogor" class="about-img">
+    
+    <div class="about-text">
+      <p style="margin:6px 0;">
+        <strong>Rental Mobil Bogor</strong> adalah layanan transportasi profesional yang berkomitmen memberikan pengalaman berkendara terbaik untuk Anda. 
+        Kami hadir dengan berbagai pilihan kendaraan seperti <strong>MPV, SUV, hingga minibus</strong> yang siap digunakan untuk perjalanan keluarga, liburan, atau keperluan bisnis.
+      </p>
+      <p style="margin:6px 0;">
+        Setiap unit kami dirawat dengan standar tinggi, bersih, dan selalu dalam kondisi prima. 
+        Tim kami juga siap membantu Anda 24 jam melalui layanan WhatsApp untuk memastikan kebutuhan transportasi Anda terpenuhi dengan cepat dan mudah.
+      </p>
+      <p style="margin:6px 0;">
+        <em>“Kenyamanan Anda adalah prioritas utama kami.”</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+    <section id="kontak" style="margin-top:26px" class="fade-up">
+      <h3>Hubungi kami</h3>
+      <div class="card" style="margin-top:8px">
+        <p style="margin:6px 0"><strong>Alamat</strong><br>Kp. Warung Borong Kauman No. 38, Rt 002/009, Bojong Rangkas, Kec. Ciampea, Kabupaten Bogor, Jawa Barat</p>
+        <p style="margin:6px 0"><strong>Telp</strong><br>Fadil: <a href="tel:082124753672">082124753672</a></p>
+        <p style="margin:6px 0"><a href="https://wa.me/6282124753672" target="_blank" rel="noopener" class="cta">Chat via WhatsApp</a></p>
+      </div>
+    </section>
+
+    <section id="syarat" style="margin-top:18px" class="fade-up">
+      <h3>Syarat dan ketentuan</h3>
+      <div class="card" style="margin-top:8px">
+        <ul style="margin:6px 0 0;padding-left:20px;color:var(--muted)">
+          <li>Fotokopi KTP & SIM</li>
+          <li>DP atau jaminan sesuai kesepakatan</li>
+          <li>Biaya tambahan untuk jarak jauh/antar-jemput</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <div><a href="https://wa.me/6282124753672" style="text-decoration:none;color:var(--muted)">Hubungi Kami</a></div>
+      <div>© 2025 Rental Mobil Bogor</div>
+    </div>
+  </footer>
+
+  <script>
+    // Observes elements with class fade-up or fade-in and adds class 'visible' when they enter viewport
+    const toAnimate = document.querySelectorAll('.fade-up, .fade-in');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // optionally unobserve so it doesn't animate again
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    toAnimate.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
